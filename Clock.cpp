@@ -24,9 +24,11 @@ bool Clock::updateTime()
 Clock::difference_time which is a private of Clock class.*/
 bool Clock::calcTimeDiff()
 {
+
     long int old = getTime();
     long int temp = (long int) time(NULL);
     difference_time = temp - old;
+    //std::cout << "time dif_calc = " << difference_time<<std::endl;
 
 }
 

@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include "Clock.hpp"
+#include "Castle.hpp"
+#include "GameRules.cpp"
 class Game
 {
 private:
@@ -11,6 +13,7 @@ private:
     std::string name_side1;
     std::string name_side2;
     Clock clock;
+    Castle castles[MAX_CASTLES];
 
 public:
 
@@ -21,7 +24,7 @@ public:
     bool updateTime();
     bool calcTimeDiff();
     long int getTDiff();
-
+    long int getCurrentTime();
 
 
 

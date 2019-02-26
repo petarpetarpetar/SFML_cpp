@@ -1,0 +1,14 @@
+//Just a bunch of defines that will represent gameRules
+
+#define START_INCOME 100
+#define START_POPULATION 50
+#define POPUL_INCOME_RATIO 2
+#define START_MONEY 1000
+#define START_FOOD 200
+#define START_DEF_BONUS 20
+#define MAX_CASTLES 10
+#define MOVESPEED_LORD 100
+#define MOVESPEED_ARCHER 60
+#define MOVESPEED_HORSEMEN 90
+#define MOVESPEED_SWORDSMEN 40
+#define MOVESPEED_SPEARMEN 50
