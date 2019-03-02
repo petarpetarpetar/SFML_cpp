@@ -59,8 +59,53 @@ bool Castle::setPosition(Coords newC)
     this->position.setY(newC.getY());
 }
 
-bool Castle::getIncome()
+int Castle::getIncome()
 {
     return this->income;
 }
 
+
+bool Castle::SetNewBuilding(BuildingType newB)
+{
+    this->currentlyBuilding = newB;
+    this->buildingProcess = 0;
+}
+
+bool Castle::addBuilding(BuildingType newB)
+{
+    buildings.push_back(newB);
+}
+
+bool Castle::updateParams() //updates income, food and def_bonus
+{
+    for(std::vector<BuildingType>::iterator it = buildings.begin(); it != buildings.end();++it)
+    {
+        int temp = *it;
+        switch(temp)
+        {
+        case HOUSE:
+
+        case SHOP:
+
+        case FARM:
+
+        case TOWER:
+
+        case MARKET:
+
+        case STONE_WALL:
+
+        case SWORDMAKER:
+
+        case SPEARMAKER:
+
+        case STABLE:
+
+        case FETCHER:
+
+        case TAX_MANAGER:
+
+        }
+
+    }
+}

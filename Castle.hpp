@@ -2,6 +2,26 @@
 #define CASTLE_HPP_INCLUDED
 #include "Coords.hpp"
 #include "GameRules.cpp"
+#include <vector>
+enum BuildingType
+{
+    //standard buildings
+    HOUSE = 1, //population increment according to number stated in gameRules
+    SHOP = 2, //income increment
+    FARM = 3, //food increment
+    TOWER = 4, //def_bonus increment
+
+
+    //special buildings, can only be made once
+    MARKET = 11, // income increase greatly, but can be made only if meets specified requirements
+    STONE_WALL = 12, // DEF_bonus increase ...
+    SWORDMAKER = 13, //enables production of swordsmen
+    SPEARMAKER = 14, //enables production of spears
+    STABLE = 15, //enables production of horsemen
+    FETCHER = 16, //enables production of archers
+    TAX_MANAGER = 17 //bonus income for every shop.
+
+};
 class Castle
 {
 private:
@@ -11,7 +31,7 @@ private:
     int money;
     int currentLordID;
     int side;
-    //Building buildings[]
+    std::vector<BuildingType> buildings;//ID-s.
     int currentlyBuilding;
     int buildingProcess;
     int income;
@@ -20,7 +40,9 @@ private:
 
 
 public:
-    Castle(int,int,int);
+    Castle(int x,int y,int side);
+
+    Castle();
 
     int getDefBonus();
 
@@ -28,9 +50,9 @@ public:
 
     int getMoney();
 
-    int getCurrentLord(int newLord);
+    int getCurrentLord();
 
-    bool setCurrentLord();
+    bool setCurrentLord(int newLord);
 
     int getSide();
 
@@ -38,14 +60,17 @@ public:
 
     int getPopulation();
 
-    bool increasePopulation();
+    bool increasePopulation(int change);
 
     int getIncome();
 
     bool setPosition(Coords newC);
 
-    //something to calculate def_bonus based on buildings
-    //something to calculate income based on population and buildings
+    bool SetNewBuilding(BuildingType newB);
+
+    bool addBuilding(BuildingType newB);
+
+    bool updateParams(); //updates income, food and def_bonus
 
 };
 

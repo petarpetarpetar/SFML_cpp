@@ -18,7 +18,7 @@ int Lord::getMoveSpeed()
 
 int Lord::getStatus()
 {
-    return this->status
+    return this->_status;
 }
 
 Coords Lord::getPos()
@@ -40,10 +40,4 @@ bool Lord::setPos(Coords newPos)
 {
     this->pos.setX(newPos.getX());
     this->pos.setY(newPos.getY());
-}
-
-
-
-
-    return this->pos;
 }

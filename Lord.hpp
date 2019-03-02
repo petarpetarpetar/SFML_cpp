@@ -2,6 +2,7 @@
 #define LORD_HPP_INCLUDED
 #include "Coords.hpp"
 #include "Army.hpp"
+#include <iostream>
 class Lord
 {
 private:
