@@ -1,25 +1,20 @@
 #include <iostream>
 #include "Game.hpp"
-#include "Castle.hpp"
-#include <SFML/Graphics.hpp>
+#include "eventHandler.hpp"
 long int game_cycle=0;
 
 int main()
 {
 
-    sf::RenderWindow window(sf::VideoMode(200, 200), "SFML works!");
-    sf::CircleShape shape(100.f);
-
-    int r=0,g=0,b=0;
+    sf::RenderWindow window(sf::VideoMode(1300, 650), "Knights of Honor - Petar Markovic");
+    sf::RectangleShape shape(sf::Vector2f(1300,650));
+    shape.setFillColor(sf::Color(10,140,0));
     while (window.isOpen())
     {
         sf::Event event;
-
-
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
-                window.close();
+            updateEvents(sf::Event ev);
         }
 
         window.clear();

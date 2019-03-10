@@ -10,6 +10,10 @@ Castle::Castle(int x, int y, int side)
     this->def_bonus = START_DEF_BONUS;
     this->money = START_MONEY;
     this->population = START_POPULATION;
+    this->sword_enable = false;
+    this->spear_enable = false;
+    this->archer_enable = false;
+    this->horse_enable = false;
 
 }
 
@@ -84,26 +88,47 @@ bool Castle::updateParams() //updates income, food and def_bonus
         switch(temp)
         {
         case HOUSE:
+            this->population += HOUSE_POPULATION_INC;
+        break;
 
         case SHOP:
+            this->income += SHOP_INCOME_INC;
+        break;
 
         case FARM:
+            this->food += FARM_FOOD_INC;
+        break;
 
         case TOWER:
+            this->def_bonus += TOWER_DEF_BONUS_INC;
+        break;
 
         case MARKET:
+            this->income += MARKET_INCOME_INC;
+        break;
 
         case STONE_WALL:
+            this->def_bonus += STONE_WALL_DEF_BONUS_INC;
+        break;
 
         case SWORDMAKER:
+            this->sword_enable = true;
+        break;
 
         case SPEARMAKER:
+            this->spear_enable = true;
+        break;
 
         case STABLE:
+            this->horse_enable = true;
+        break;
 
         case FETCHER:
-
+            this->archer_enable = true;
+        break;
         case TAX_MANAGER:
+            //still needs to be implemented, basically physical work... -.-
+        break;
 
         }
 

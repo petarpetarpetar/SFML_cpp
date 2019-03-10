@@ -36,6 +36,10 @@ private:
     int buildingProcess;
     int income;
     int population;
+    bool sword_enable;
+    bool spear_enable;
+    bool horse_enable;
+    bool archer_enable;
     Coords position;
 
 
