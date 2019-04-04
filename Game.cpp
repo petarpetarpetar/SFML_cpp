@@ -1,11 +1,8 @@
 #include "Game.hpp"
 
-Game::Game(int nL=4, int nC=4, std::string side1 = "s1", std::string side2 = "s2") : clock()
+Game::Game() : clock()
 {
-    this->name_side1 = side1;
-    this->name_side2 = side2;
-    this->number_of_castles = nC;
-    this->number_of_lords = nL;
+    std::cout << "a new game session started"<<std::endl;
 }
 
 long int Game::getCurrentTime()
@@ -13,14 +10,14 @@ long int Game::getCurrentTime()
     return clock.getTime();
 }
 
-int Game::getNumCastle()
+int Game::getNumCastle(int playerID)
 {
-    return this->number_of_castles;
+    return this->players.at(playerID).getNumCastle();
 }
 
-int Game::getNumLords()
+int Game::getNumLords(int playerID)
 {
-    return this->number_of_lords;
+    return this->players.at(playerID).getNumLords();
 }
 
 bool Game::calcTimeDiff()
@@ -37,13 +34,30 @@ long int Game::getTDiff()
 {
     return clock.getTimeDiff();
 }
-
-bool Game::addCaste(Castle newC)
+Player Game::getPlayer(int playerID)
 {
-    castles.push_back(newC);
+    return players.at(playerID);
+}
+bool Game::addCastle(int playerID,Castle newC)
+{
+    players.at(playerID).addCaste(newC);
 }
 
-bool Game::addLord(Lord newL)
+bool Game::addLord(int playerID,Lord newL)
 {
-    lords.push_back(newL);
+    players.at(playerID).addLord(newL);
 }
+bool Game::addPlayer(Player p)
+{
+    players.push_back(p);
+}
+
+Castle Game::getCastle(int playerID, int castleID)
+{
+    players.at(playerID).getCastle(castleID);
+}
+Lord Game::getLord(int playerID, int lordID)
+{
+    players.at(playerID).getLord(lordID);
+}
+

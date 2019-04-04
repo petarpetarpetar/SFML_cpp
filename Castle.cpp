@@ -1,10 +1,9 @@
 #include "Castle.hpp"
 
-Castle::Castle(int x, int y, int side)
+Castle::Castle(int x, int y)
 {
     this->position.setX(x);
     this->position.setY(y);
-    this->side = side;
     //influenced by GameRules.cpp
     this->food = START_FOOD;
     this->def_bonus = START_DEF_BONUS;
@@ -15,6 +14,11 @@ Castle::Castle(int x, int y, int side)
     this->archer_enable = false;
     this->horse_enable = false;
 
+}
+Castle::Castle()
+{
+    this->position.setX(30);
+    this->position.setY(30);
 }
 
 int Castle::getDefBonus()
@@ -31,7 +35,10 @@ int Castle::getMoney()
 {
     return this->money;
 }
-
+Coords Castle::getPosition()
+{
+    return this->position;
+}
 int Castle::getCurrentLord()
 {
     return this->currentLordID;

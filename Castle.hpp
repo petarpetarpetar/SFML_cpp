@@ -28,7 +28,7 @@ private:
     //Army garnison[]
     int def_bonus;
     int food;
-    int money;
+    int money; //pasdkoasjd
     int currentLordID;
     int side;
     std::vector<BuildingType> buildings;//ID-s.
@@ -44,7 +44,7 @@ private:
 
 
 public:
-    Castle(int x,int y,int side);
+    Castle(int x,int y);
 
     Castle();
 
@@ -67,6 +67,8 @@ public:
     bool increasePopulation(int change);
 
     int getIncome();
+
+    Coords getPosition();
 
     bool setPosition(Coords newC);
 

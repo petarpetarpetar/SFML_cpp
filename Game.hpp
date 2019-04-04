@@ -7,36 +7,35 @@
 #include "Clock.hpp"
 #include "Castle.hpp"
 #include "GameRules.cpp"
-
+#include "Player.hpp"
+#include <SFML/Graphics.hpp>
 class Game
 {
 private:
-    int number_of_lords;
-    int number_of_castles;
-    std::string name_side1;
-    std::string name_side2;
+
+
+
+    //replace all of this with:
+    std::vector<Player> players;
     Clock clock;
-    std::vector<Lord> lords;
-    std::vector<Castle> castles;
-
-
 public:
 
-    Game(int nL,int nC,std::string side1,std::string side2);
+    Game();
 
-    int getNumLords();
-    int getNumCastle();
-
+    int getNumLords(int playerID);
+    int getNumCastle(int playerID);
+    Player getPlayer(int playerID);
+    bool newPlayer();
     bool updateTime();
     bool calcTimeDiff();
     long int getTDiff();
     long int getCurrentTime();
+    bool addPlayer(Player p);
+    bool addCastle(int playedID,Castle newC);
+    bool addLord(int playerID,Lord newL);
 
-    bool addCaste(Castle newC);
-    bool addLord(Lord newL);
-
-
-
+    Castle getCastle(int playerID, int CastleID);
+    Lord getLord(int playerID, int lordID);
 
 
 
