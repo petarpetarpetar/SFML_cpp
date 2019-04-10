@@ -33,6 +33,7 @@ public:
     bool addPlayer(Player p);
     bool addCastle(int playedID,Castle newC);
     bool addLord(int playerID,Lord newL);
+    int getNumPlayers();
 
     Castle getCastle(int playerID, int CastleID);
     Lord getLord(int playerID, int lordID);

@@ -40,7 +40,13 @@ Player Game::getPlayer(int playerID)
 }
 bool Game::addCastle(int playerID,Castle newC)
 {
+    std::cout <<"debug " << playerID<<std::endl;
     players.at(playerID).addCaste(newC);
+}
+
+int Game::getNumPlayers()
+{
+    return this->players.size();
 }
 
 bool Game::addLord(int playerID,Lord newL)
@@ -54,10 +60,10 @@ bool Game::addPlayer(Player p)
 
 Castle Game::getCastle(int playerID, int castleID)
 {
-    players.at(playerID).getCastle(castleID);
+    return players.at(playerID).getCastle(castleID);
 }
 Lord Game::getLord(int playerID, int lordID)
 {
-    players.at(playerID).getLord(lordID);
+    return players.at(playerID).getLord(lordID);
 }
 

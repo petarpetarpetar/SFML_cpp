@@ -15,7 +15,12 @@ int Player::getNumCastle()
 
 bool Player::addCaste(Castle newC)
 {
+    std::cout <<"newC pos : "<<newC.getPosition().getX()<<"|"<<newC.getPosition().getY()<<std::endl;
+    std::cout <<"castle size 0: "<<castles.size()<<std::endl;
+    std::cout <<"push_back occured"<<std::endl;
     castles.push_back(newC);
+    std::cout <<"castle size 1: "<<castles.size()<<std::endl;
+    std::cout << "pos in func: " << castles.at(0).getPosition().getX()<<std::endl;
 }
 
 bool Player::addLord(Lord newL)
