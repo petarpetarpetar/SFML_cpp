@@ -67,3 +67,22 @@ Lord Game::getLord(int playerID, int lordID)
     return players.at(playerID).getLord(lordID);
 }
 
+
+std::string Game::getPlayerName(int ID)
+{
+    return players.at(ID).getName();
+}
+
+bool Game::setPlayerName(int ID, std::string newN)
+{
+    players.at(ID).setName(newN);
+}
+
+
+
+
+
+
+
+
+

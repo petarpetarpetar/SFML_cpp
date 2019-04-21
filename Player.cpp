@@ -34,7 +34,7 @@ Player::Player(int playerID,int number_of_lords, int number_of_castles,std::stri
     this->ID = playerID;
     this->number_of_castles = number_of_castles;
     this->number_of_lords = number_of_lords;
-    this->name_side1 = name;
+    this->name = name;
 }
 
 Castle Player::getCastle(int castleID)
@@ -45,4 +45,13 @@ Castle Player::getCastle(int castleID)
 Lord Player::getLord(int lordID)
 {
     return this->lords.at(lordID);
+}
+
+bool Player::setName(std::string newN)
+{
+    this->name = newN;
+}
+std::string Player::getName()
+{
+    return name;
 }

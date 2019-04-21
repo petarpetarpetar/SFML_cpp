@@ -9,20 +9,20 @@ int main()
 
     //initialize game window:
 
-    sf::RenderWindow window(sf::VideoMode(1340, 680), "Knights of Honor - Petar Markovic");
-    sf::RectangleShape grass(sf::Vector2f(1340,680)); //grass terrain shape
-    sf::RectangleShape side_menu(sf::Vector2f(1340,40));
-    side_menu.setFillColor(sf::Color::Blue);
+    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic");
+    sf::RectangleShape grass(sf::Vector2f(WIDTH, HEIGHT)); //grass terrain shape
     grass.setFillColor(sf::Color(30,180,10));
 
+
     sf::Sprite sprites[10][2][10];
+    sf::Sprite side_menu;
 
     // #done - initialize game window
 
     //load all textures:
 
     sf::Texture castle_texture;
-    if(!castle_texture.loadFromFile("graphics_castle.png"))
+    if(!castle_texture.loadFromFile("resources/graphics_castle.png"))
     {
         std::cout <<"error: failed to load graphics_castle.png"<<std::endl;
         return -1;
@@ -30,9 +30,15 @@ int main()
     std::cout << "done: Successfully loaded graphics_castle.png"<<std::endl;
 
     sf::Texture lord_texture;
-    if(!lord_texture.loadFromFile("JPG_graphics_lord.jpg"))
+    if(!lord_texture.loadFromFile("resources/JPG_graphics_lord.jpg"))
     {
         std::cout <<"error: failed to load JPG_graphics_lord.jpg"<<std::endl;
+    }
+
+    sf::Texture side_menu_texture;
+    if(!side_menu_texture.loadFromFile("resources/side_texture.jpg"))
+    {
+        std::cout <<"error:failed to load side_texture.jpg"<<std::endl;
     }
     std::cout <<"done: Successfully loaded JPG_graphics_lord.jpg"<<std::endl;
 
@@ -43,13 +49,13 @@ int main()
 
     //this should be changed with just one load from file command
 
-    Player p1(0,1,1,"player1");
+    Player p1(0,1,1,"CenzurisaN");
     Player p2(1,1,1,"player2");
 
     g.addPlayer(p1);
     g.addPlayer(p2);
 
-    Castle temp(10,10);
+    Castle temp(50,50);
     Lord tempL(300,300,"asad al husein quran");
     g.addCastle(0,temp);
     g.addLord(0,tempL);
@@ -60,7 +66,7 @@ int main()
 
     //Lord
     sprites[0][1][0].setTexture(lord_texture);
-    sprites[0][1][0].setScale(0.2,0.2);
+    sprites[0][1][0].setScale(0.1,0.1);
 
     Coords temp_pos = g.getCastle(0,0).getPosition();
     Coords temp_lord_c = g.getLord(0,0).getPosition();
@@ -71,6 +77,23 @@ int main()
     //idi kroz sve 0, n, 0 sprajtove i postavi da budu lord ili castle i slicno za 0,0,n
 
 
+    //stats display - TEXT
+    sf::Font font;
+    font.loadFromFile("resources/fts.otf");
+    sf::Text text;
+    text.setFont(font);
+    int myId=1;
+    text.setString(g.getPlayer(myId).getName());
+
+
+    text.setPosition(WIDTH/2,0);
+    text.setColor(sf::Color::Black);
+    text.setStyle(sf::Text::Bold|sf::Text::Underlined);
+    text.setOutlineColor(sf::Color::Yellow);
+    text.setOutlineThickness(0.2);
+    side_menu_texture.setRepeated(true);
+    side_menu.setTexture(side_menu_texture,true);
+    side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
 
     while (window.isOpen())
     {
@@ -83,9 +106,11 @@ int main()
         }
 
         window.draw(grass);
-        window.draw(sprites[0][0][0]);
         window.draw(side_menu);
+        window.draw(sprites[0][0][0]);
         window.draw(sprites[0][1][0]);
+        window.draw(text);
+
         window.display();
 
 

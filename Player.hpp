@@ -10,7 +10,7 @@ private:
     int ID;
     int number_of_lords;
     int number_of_castles;
-    std::string name_side1;
+    std::string name;
     std::vector<Lord> lords;
     std::vector<Castle> castles;
 
@@ -24,6 +24,8 @@ public:
     bool addLord(Lord newL);
     Castle getCastle(int castleID);
     Lord getLord(int lordID);
+    bool setName(std::string newN);
+    std::string getName();
 
 
 };

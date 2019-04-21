@@ -35,6 +35,9 @@ public:
     bool addLord(int playerID,Lord newL);
     int getNumPlayers();
 
+    std::string getPlayerName(int ID);
+    bool setPlayerName(int ID, std::string newN);
+
     Castle getCastle(int playerID, int CastleID);
     Lord getLord(int playerID, int lordID);
 

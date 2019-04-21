@@ -1,5 +1,8 @@
 //Just a bunch of defines that will represent gameRules
 
+#define WIDTH 1340
+#define HEIGHT 680
+
 #define START_INCOME 100
 #define START_POPULATION 50
 #define POPUL_INCOME_RATIO 2
