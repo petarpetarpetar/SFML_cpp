@@ -7,33 +7,28 @@ class Lord
 {
 private:
     Army army;
-    enum status
-    {
-        dead = 0,
-        alive = 1,
-        wounded = 2,
-        imprisoned = 3
-    };
+
+
     int moveSpeed;
     int battlesWon;
     int side;
     int lastBattle;
     std::string name;
-    Coords pos;
-    int _status; //alive or dead   mozda ide samo status _status nisam sig
+    Coords position;
+    int _status; //alive or dead   mozda ide samo status _status nisam sig   0-dead, 1-alive, 2-in_castle
 
 public:
-    Lord(int side,std::string name);
+    Lord(int posX, int posY, std::string _name );
 
     int getMoveSpeed();
     int getBattlesWon();
     int getStatus();
-    Coords getPos();
-
+    Coords getPosition();
     bool setStatus(int newStatus);
     bool incBattlesWon();
     bool setPos(Coords newPos);
-;
+    bool setSide(int _side);
+
     //some army functions
 
 

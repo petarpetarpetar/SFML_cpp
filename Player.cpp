@@ -26,6 +26,7 @@ bool Player::addCaste(Castle newC)
 bool Player::addLord(Lord newL)
 {
     lords.push_back(newL);
+
 }
 
 Player::Player(int playerID,int number_of_lords, int number_of_castles,std::string name)

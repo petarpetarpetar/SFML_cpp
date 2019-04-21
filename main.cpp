@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Game.hpp"
-long int game_cycle=0;
+long int game_cycle = 0;
+int player_coutn = 0;
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 int main()
@@ -8,10 +9,11 @@ int main()
 
     //initialize game window:
 
-    sf::RenderWindow window(sf::VideoMode(1300, 650), "Knights of Honor - Petar Markovic");
-    sf::RectangleShape grass(sf::Vector2f(1300,650)); //grass terrain shape
-
-    grass.setFillColor(sf::Color::Green);
+    sf::RenderWindow window(sf::VideoMode(1340, 680), "Knights of Honor - Petar Markovic");
+    sf::RectangleShape grass(sf::Vector2f(1340,680)); //grass terrain shape
+    sf::RectangleShape side_menu(sf::Vector2f(1340,40));
+    side_menu.setFillColor(sf::Color::Blue);
+    grass.setFillColor(sf::Color(30,180,10));
 
     sf::Sprite sprites[10][2][10];
 
@@ -20,11 +22,19 @@ int main()
     //load all textures:
 
     sf::Texture castle_texture;
-    if(!castle_texture.loadFromFile("castle_texture_1.png"))
+    if(!castle_texture.loadFromFile("graphics_castle.png"))
     {
-        std::cout <<"failed to load castle_texture_1.png"<<std::endl;
+        std::cout <<"error: failed to load graphics_castle.png"<<std::endl;
         return -1;
     }
+    std::cout << "done: Successfully loaded graphics_castle.png"<<std::endl;
+
+    sf::Texture lord_texture;
+    if(!lord_texture.loadFromFile("JPG_graphics_lord.jpg"))
+    {
+        std::cout <<"error: failed to load JPG_graphics_lord.jpg"<<std::endl;
+    }
+    std::cout <<"done: Successfully loaded JPG_graphics_lord.jpg"<<std::endl;
 
 
     // #done - load all textures
@@ -33,22 +43,31 @@ int main()
 
     //this should be changed with just one load from file command
 
-    Player p1(0,1,1,"ime1");
-    Player p2(1,1,1,"ime2");
+    Player p1(0,1,1,"player1");
+    Player p2(1,1,1,"player2");
+
     g.addPlayer(p1);
     g.addPlayer(p2);
+
     Castle temp(10,10);
+    Lord tempL(300,300,"asad al husein quran");
     g.addCastle(0,temp);
+    g.addLord(0,tempL);
 
+    //castle
     sprites[0][0][0].setTexture(castle_texture);
-    sprites[0][0][0].setScale(0.1,0.1);
+    sprites[0][0][0].setScale(0.2,0.2);
 
-    Castle temp_castle = g.getCastle(0,0);
+    //Lord
+    sprites[0][1][0].setTexture(lord_texture);
+    sprites[0][1][0].setScale(0.2,0.2);
+
     Coords temp_pos = g.getCastle(0,0).getPosition();
+    Coords temp_lord_c = g.getLord(0,0).getPosition();
 
 
     sprites[0][0][0].setPosition(temp_pos.getX(),temp_pos.getY());
-
+    sprites[0][1][0].setPosition(temp_lord_c.getX(),temp_lord_c.getY());
     //idi kroz sve 0, n, 0 sprajtove i postavi da budu lord ili castle i slicno za 0,0,n
 
 
@@ -65,6 +84,8 @@ int main()
 
         window.draw(grass);
         window.draw(sprites[0][0][0]);
+        window.draw(side_menu);
+        window.draw(sprites[0][1][0]);
         window.display();
 
 

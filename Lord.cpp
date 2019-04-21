@@ -1,9 +1,14 @@
 #include "Lord.hpp"
 
-Lord::Lord(int side, std::string name)
+Lord::Lord(int posX,int posY, std::string _name)
 {
-    this->side = side;
-    this->name = name;
+    position.setX(posX);
+    position.setY(posY);
+    this->name = _name;
+}
+bool Lord::setSide(int _side)
+{
+    this->side = _side;
 }
 
 int Lord::getBattlesWon()
@@ -21,9 +26,9 @@ int Lord::getStatus()
     return this->_status;
 }
 
-Coords Lord::getPos()
+Coords Lord::getPosition()
 {
-    return this->pos;
+    return this->position;
 }
 
 bool Lord::setStatus(int newStatus)
@@ -38,6 +43,6 @@ bool Lord::incBattlesWon()
 
 bool Lord::setPos(Coords newPos)
 {
-    this->pos.setX(newPos.getX());
-    this->pos.setY(newPos.getY());
+    this->position.setX(newPos.getX());
+    this->position.setY(newPos.getY());
 }
