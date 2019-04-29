@@ -78,10 +78,15 @@ bool Game::setPlayerName(int ID, std::string newN)
     players.at(ID).setName(newN);
 }
 
+int Game::getMoney(int PlayerID)
+{
+    return players.at(PlayerID).getMoney();
+}
 
-
-
-
+bool Game::addMoney(int PlayerID,int val)
+{
+    players.at(PlayerID).addMoney(val);
+}
 
 
 

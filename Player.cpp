@@ -37,6 +37,15 @@ Player::Player(int playerID,int number_of_lords, int number_of_castles,std::stri
     this->name = name;
 }
 
+int Player::getMoney()
+{
+    return this->money;
+}
+bool Player::addMoney(int val)
+{
+    this->money+=val;
+}
+
 Castle Player::getCastle(int castleID)
 {
     return this->castles.at(castleID);

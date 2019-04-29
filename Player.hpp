@@ -13,6 +13,7 @@ private:
     std::string name;
     std::vector<Lord> lords;
     std::vector<Castle> castles;
+    int money;
 
 public:
 
@@ -26,6 +27,8 @@ public:
     Lord getLord(int lordID);
     bool setName(std::string newN);
     std::string getName();
+    int getMoney();
+    bool addMoney(int val);
 
 
 };

@@ -1,9 +1,14 @@
 #include <iostream>
 #include "Game.hpp"
+
 long int game_cycle = 0;
 int player_coutn = 0;
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
+
+
+
+
 int main()
 {
 
@@ -16,6 +21,7 @@ int main()
 
     sf::Sprite sprites[10][2][10];
     sf::Sprite side_menu;
+    sf::Sprite coin_icon;
 
     // #done - initialize game window
 
@@ -42,19 +48,30 @@ int main()
     }
     std::cout <<"done: Successfully loaded JPG_graphics_lord.jpg"<<std::endl;
 
+    sf::Texture coin_icon_texture;
+    if(!coin_icon_texture.loadFromFile("resources/coin-icon.png"))
+    {
+        std::cout <<"error:failed to load coin-icon.png"<<std::endl;
+    }
 
     // #done - load all textures
 
     Game g;
+    //update everything using references.
+    Game& gref = g;
+    sf::RenderWindow& winref = window;
+
+
 
     //this should be changed with just one load from file command
 
-    Player p1(0,1,1,"CenzurisaN");
-    Player p2(1,1,1,"player2");
+    Player p1(0,1,1,"asd");
+    Player p2(1,1,1,"Cenzurisan");
 
     g.addPlayer(p1);
     g.addPlayer(p2);
 
+    g.addMoney(1,1000);
     Castle temp(50,50);
     Lord tempL(300,300,"asad al husein quran");
     g.addCastle(0,temp);
@@ -79,21 +96,29 @@ int main()
 
     //stats display - TEXT
     sf::Font font;
-    font.loadFromFile("resources/fts.otf");
-    sf::Text text;
-    text.setFont(font);
+    sf::Text coin_text;
+    font.loadFromFile("resources/fonts/Dearest.ttf");
+    sf::Text name;
+    coin_text.setFont(font);
+    name.setFont(font);
     int myId=1;
-    text.setString(g.getPlayer(myId).getName());
 
+    coin_text.setString(std::to_string(g.getMoney(myId)));
+    coin_text.setPosition(5,5);
+    coin_text.setScale(0.9,0.9);
+    coin_text.setColor(sf::Color::Black);
 
-    text.setPosition(WIDTH/2,0);
-    text.setColor(sf::Color::Black);
-    text.setStyle(sf::Text::Bold|sf::Text::Underlined);
-    text.setOutlineColor(sf::Color::Yellow);
-    text.setOutlineThickness(0.2);
+    name.setString(g.getPlayer(myId).getName());
+    name.setPosition(WIDTH/2,0);
+    name.setScale(1.2,1.2);
+    name.setColor(sf::Color::Black);
+
     side_menu_texture.setRepeated(true);
     side_menu.setTexture(side_menu_texture,true);
     side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
+    coin_icon.setTexture(coin_icon_texture,true);
+    coin_icon.setPosition(100,5);
+    coin_icon.setScale(0.2,0.2);
 
     while (window.isOpen())
     {
@@ -103,14 +128,20 @@ int main()
              if (event.type == sf::Event::Closed)
                 window.close();
 
+
+
+
         }
 
         window.draw(grass);
         window.draw(side_menu);
         window.draw(sprites[0][0][0]);
         window.draw(sprites[0][1][0]);
-        window.draw(text);
-
+        window.draw(coin_icon);
+        window.draw(name);
+        window.draw(coin_text);
+        g.addMoney(1,2);
+        coin_text.setString(std::to_string(g.getMoney(myId)));
         window.display();
 
 
