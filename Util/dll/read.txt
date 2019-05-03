@@ -1,0 +1,3 @@
+these are the dlls you need to put in your project folder or the folder where
+you cloned repo.
+I couldn't dynamically link everything so u have to do copy-paste ;)
