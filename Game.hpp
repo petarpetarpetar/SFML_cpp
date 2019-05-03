@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <vector>
-#include "Lord.hpp"
-#include "Clock.hpp"
-#include "Castle.hpp"
-#include "GameRules.cpp"
-#include "Player.hpp"
+#include "Util/Lord.hpp"
+#include "Util/Clock.hpp"
+#include "Util/Castle.hpp"
+#include "Util/GameRules.cpp"
+#include "Util/Player.hpp"
+
+
 #include <SFML/Graphics.hpp>
 class Game
 {
@@ -42,8 +44,6 @@ public:
     bool addMoney(int playerID,int val);
     Castle getCastle(int playerID, int CastleID);
     Lord getLord(int playerID, int lordID);
-
-
 
 };
 

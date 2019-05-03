@@ -5,19 +5,19 @@ long int game_cycle = 0;
 int player_coutn = 0;
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
-
-
+#include "Util/eventHandler.hpp"
+int gamestate_temp = 0;
+//0 - loading everything and players connecting
+//1 - castle placement
+//2 - game begins
 
 
 int main()
 {
 
-    //initialize game window:
-
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic");
     sf::RectangleShape grass(sf::Vector2f(WIDTH, HEIGHT)); //grass terrain shape
     grass.setFillColor(sf::Color(30,180,10));
-
 
     sf::Sprite sprites[10][2][10];
     sf::Sprite side_menu;
@@ -38,7 +38,12 @@ int main()
     sf::Texture lord_texture;
     if(!lord_texture.loadFromFile("resources/JPG_graphics_lord.jpg"))
     {
-        std::cout <<"error: failed to load JPG_graphics_lord.jpg"<<std::endl;
+        std::cout << "error: failed to load JPG_graphics_lord.jpg"<<std::endl;
+    }
+    sf::Texture sultan_texture;
+    if(!sultan_texture.loadFromFile("resources/sultan.jpg"))
+    {
+        std::cout << "error: failed to load sultan.jpg\n";
     }
 
     sf::Texture side_menu_texture;
@@ -66,14 +71,14 @@ int main()
     //this should be changed with just one load from file command
 
     Player p1(0,1,1,"asd");
-    Player p2(1,1,1,"Cenzurisan");
+    Player p2(1,1,1,"Remove Kebab");
 
     g.addPlayer(p1);
     g.addPlayer(p2);
 
     g.addMoney(1,1000);
-    Castle temp(50,50);
-    Lord tempL(300,300,"asad al husein quran");
+    Castle temp(750,50);
+    Lord tempL(700,300,"asad al husein quran");
     g.addCastle(0,temp);
     g.addLord(0,tempL);
 
@@ -85,12 +90,18 @@ int main()
     sprites[0][1][0].setTexture(lord_texture);
     sprites[0][1][0].setScale(0.1,0.1);
 
+    //sultan
+    sprites[0][2][0].setTexture(sultan_texture);
+    sprites[0][2][0].setScale(1,1);
+
+
     Coords temp_pos = g.getCastle(0,0).getPosition();
     Coords temp_lord_c = g.getLord(0,0).getPosition();
 
 
     sprites[0][0][0].setPosition(temp_pos.getX(),temp_pos.getY());
     sprites[0][1][0].setPosition(temp_lord_c.getX(),temp_lord_c.getY());
+    sprites[0][2][0].setPosition(800,300);
     //idi kroz sve 0, n, 0 sprajtove i postavi da budu lord ili castle i slicno za 0,0,n
 
 
@@ -119,15 +130,14 @@ int main()
     coin_icon.setTexture(coin_icon_texture,true);
     coin_icon.setPosition(100,5);
     coin_icon.setScale(0.2,0.2);
-
+    eventHandler handler;
     while (window.isOpen())
     {
-        sf::Event event;
-        while (window.pollEvent(event))
+        sf::Event ev;
+        while (window.pollEvent(ev))
         {
-             if (event.type == sf::Event::Closed)
-                window.close();
-
+            sf::Event& event = ev;
+            handler.handle(ev,winref,sprites,g);
 
 
 
@@ -137,6 +147,7 @@ int main()
         window.draw(side_menu);
         window.draw(sprites[0][0][0]);
         window.draw(sprites[0][1][0]);
+        window.draw(sprites[0][2][0]);
         window.draw(coin_icon);
         window.draw(name);
         window.draw(coin_text);
