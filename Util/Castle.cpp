@@ -82,6 +82,18 @@ bool Castle::SetNewBuilding(BuildingType newB)
     this->buildingProcess = 0;
 }
 
+std::string Castle::getName()
+{
+    return this->name;
+}
+void Castle::setName(std::string name)
+{
+    this->name = name;
+    return;
+}
+
+
+
 bool Castle::addBuilding(BuildingType newB)
 {
     buildings.push_back(newB);

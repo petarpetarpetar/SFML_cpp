@@ -20,3 +20,9 @@ bool Coords::setY(int newY)
 {
     this->y = newY;
 }
+
+Coords::Coords(int x,int y)
+{
+    this->x = x;
+    this->y = y;
+}

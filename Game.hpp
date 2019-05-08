@@ -45,6 +45,9 @@ public:
     Castle getCastle(int playerID, int CastleID);
     Lord getLord(int playerID, int lordID);
 
+    std::string getCastleName(int playerID,int castleID);
+    void setCastleName(int playerID,int castleID,std::string name);
+
 };
 
 

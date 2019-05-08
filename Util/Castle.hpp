@@ -3,6 +3,7 @@
 #include "Coords.hpp"
 #include "GameRules.cpp"
 #include <vector>
+#include <iostream>
 enum BuildingType
 {
     //standard buildings
@@ -26,6 +27,7 @@ class Castle
 {
 private:
     //Army garnison[]
+    std::string name;
     int def_bonus;
     int food;
     int money; //pasdkoasjd
@@ -45,6 +47,10 @@ private:
 
 public:
     Castle(int x,int y);
+
+    std::string getName();
+
+    void setName(std::string name);
 
     Castle();
 

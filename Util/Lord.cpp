@@ -10,7 +10,10 @@ bool Lord::setSide(int _side)
 {
     this->side = _side;
 }
-
+Lord::Lord(int a)
+{
+    //idk what will empty lord look alike
+}
 int Lord::getBattlesWon()
 {
     return this->battlesWon;

@@ -11,8 +11,7 @@ public:
     //handle game events
     eventHandler();
     ~eventHandler();
-    void handle(sf::Event event, sf::RenderWindow& window,sf::Sprite sprites[10][2][10],Game g);
-
+    void handle(sf::Event event, sf::RenderWindow& window,sf::Sprite sprites[10][2][10],Game* g,Lord* selectL, Castle* selectC);
 };
 
 

@@ -14,7 +14,6 @@ int gamestate_temp = 0;
 
 int main()
 {
-
     sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic");
     sf::RectangleShape grass(sf::Vector2f(WIDTH, HEIGHT)); //grass terrain shape
     grass.setFillColor(sf::Color(30,180,10));
@@ -70,8 +69,8 @@ int main()
 
     //this should be changed with just one load from file command
 
-    Player p1(0,1,1,"asd");
-    Player p2(1,1,1,"Remove Kebab");
+    Player p1(0,"asd");
+    Player p2(1,"petar");
 
     g.addPlayer(p1);
     g.addPlayer(p2);
@@ -91,8 +90,8 @@ int main()
     sprites[0][1][0].setScale(0.1,0.1);
 
     //sultan
-    sprites[0][2][0].setTexture(sultan_texture);
-    sprites[0][2][0].setScale(1,1);
+    sprites[0][1][1].setTexture(sultan_texture);
+    sprites[0][1][1].setScale(1,1);
 
 
     Coords temp_pos = g.getCastle(0,0).getPosition();
@@ -101,14 +100,14 @@ int main()
 
     sprites[0][0][0].setPosition(temp_pos.getX(),temp_pos.getY());
     sprites[0][1][0].setPosition(temp_lord_c.getX(),temp_lord_c.getY());
-    sprites[0][2][0].setPosition(800,300);
+    sprites[0][1][1].setPosition(800,300);
     //idi kroz sve 0, n, 0 sprajtove i postavi da budu lord ili castle i slicno za 0,0,n
 
 
     //stats display - TEXT
     sf::Font font;
     sf::Text coin_text;
-    font.loadFromFile("resources/fonts/Dearest.ttf");
+    font.loadFromFile("resources/fonts/MIROSLN.ttf");
     sf::Text name;
     coin_text.setFont(font);
     name.setFont(font);
@@ -131,13 +130,19 @@ int main()
     coin_icon.setPosition(100,5);
     coin_icon.setScale(0.2,0.2);
     eventHandler handler;
+
+    Lord selectL;
+    bool selectL_flag=false;
+    Castle selectC;
+    bool selectC_flag=false;
+
     while (window.isOpen())
     {
         sf::Event ev;
         while (window.pollEvent(ev))
         {
             sf::Event& event = ev;
-            handler.handle(ev,winref,sprites,g);
+            handler.handle(ev,winref,sprites,&g,&selectL,&selectC);
 
 
 
@@ -147,7 +152,7 @@ int main()
         window.draw(side_menu);
         window.draw(sprites[0][0][0]);
         window.draw(sprites[0][1][0]);
-        window.draw(sprites[0][2][0]);
+        window.draw(sprites[0][1][1]);
         window.draw(coin_icon);
         window.draw(name);
         window.draw(coin_text);
@@ -155,6 +160,10 @@ int main()
         coin_text.setString(std::to_string(g.getMoney(myId)));
         window.display();
 
+
+
+
+        //ignore for now
 
         for(int i =0; i < g.getNumPlayers();i++)
         {

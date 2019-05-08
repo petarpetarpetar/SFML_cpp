@@ -40,7 +40,6 @@ Player Game::getPlayer(int playerID)
 }
 bool Game::addCastle(int playerID,Castle newC)
 {
-    std::cout <<"debug " << playerID<<std::endl;
     players.at(playerID).addCaste(newC);
 }
 
@@ -66,8 +65,14 @@ Lord Game::getLord(int playerID, int lordID)
 {
     return players.at(playerID).getLord(lordID);
 }
-
-
+std::string Game::getCastleName(int PlayerID,int CastleID)
+{
+    return this->players.at(PlayerID).getCastle(CastleID).getName();
+}
+void Game::setCastleName(int PlayerID,int CastleID, std::string name)
+{
+    players.at(PlayerID).setCastleName(CastleID,name);
+}
 std::string Game::getPlayerName(int ID)
 {
     return players.at(ID).getName();

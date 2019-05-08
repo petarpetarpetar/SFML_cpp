@@ -18,8 +18,9 @@ private:
     int _status; //alive or dead   mozda ide samo status _status nisam sig   0-dead, 1-alive, 2-in_castle
 
 public:
+    Lord(){std::cout <<"temp lord created"<<std::endl;}
     Lord(int posX, int posY, std::string _name );
-
+    Lord(int a);
     int getMoveSpeed();
     int getBattlesWon();
     int getStatus();

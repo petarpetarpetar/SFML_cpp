@@ -18,7 +18,7 @@ private:
 public:
 
     Player(int playerID);
-    Player(int playerID,int number_of_lords, int number_of_castles,std::string name);
+    Player(int playerID,std::string name);
     int getNumLords();
     int getNumCastle();
     bool addCaste(Castle newC);
@@ -29,6 +29,8 @@ public:
     std::string getName();
     int getMoney();
     bool addMoney(int val);
+    std::string getCastleName(int castleID);
+    void setCastleName(int CastleID, std::string name);
 
 
 };

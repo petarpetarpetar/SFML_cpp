@@ -13,7 +13,7 @@ public:
     int getY();
     bool setX(int newX);
     bool setY(int newY);
-
+    Coords(int x,int y);
 };
 
 
