@@ -46,7 +46,7 @@ private:
 
 
 public:
-    Castle(int x,int y);
+    Castle(int x,int y,std::string name);
 
     std::string getName();
 

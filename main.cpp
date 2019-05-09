@@ -14,68 +14,14 @@ int gamestate_temp = 0;
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic");
-    sf::RectangleShape grass(sf::Vector2f(WIDTH, HEIGHT)); //grass terrain shape
-    grass.setFillColor(sf::Color(30,180,10));
-
-    sf::Sprite sprites[10][2][10];
-    sf::Sprite side_menu;
-    sf::Sprite coin_icon;
-
-    // #done - initialize game window
-
-    //load all textures:
-
-    sf::Texture castle_texture;
-    if(!castle_texture.loadFromFile("resources/graphics_castle.png"))
-    {
-        std::cout <<"error: failed to load graphics_castle.png"<<std::endl;
-        return -1;
-    }
-    std::cout << "done: Successfully loaded graphics_castle.png"<<std::endl;
-
-    sf::Texture lord_texture;
-    if(!lord_texture.loadFromFile("resources/JPG_graphics_lord.jpg"))
-    {
-        std::cout << "error: failed to load JPG_graphics_lord.jpg"<<std::endl;
-    }
-    sf::Texture sultan_texture;
-    if(!sultan_texture.loadFromFile("resources/sultan.jpg"))
-    {
-        std::cout << "error: failed to load sultan.jpg\n";
-    }
-
-    sf::Texture side_menu_texture;
-    if(!side_menu_texture.loadFromFile("resources/side_texture.jpg"))
-    {
-        std::cout <<"error:failed to load side_texture.jpg"<<std::endl;
-    }
-    std::cout <<"done: Successfully loaded JPG_graphics_lord.jpg"<<std::endl;
-
-    sf::Texture coin_icon_texture;
-    if(!coin_icon_texture.loadFromFile("resources/coin-icon.png"))
-    {
-        std::cout <<"error:failed to load coin-icon.png"<<std::endl;
-    }
-
-    // #done - load all textures
-
+    //sf::RectangleShape grass(sf::Vector2f(WIDTH, HEIGHT)); //grass terrain shape
+    //grass.setFillColor(sf::Color(30,180,10));
     Game g;
-    //update everything using references.
-    Game& gref = g;
-    sf::RenderWindow& winref = window;
 
-
-
-    //this should be changed with just one load from file command
-
-    Player p1(0,"asd");
-    Player p2(1,"petar");
-
-    g.addPlayer(p1);
-    g.addPlayer(p2);
-
+    g.addPlayer(0,"petar");
+    g.addPlayer(1,"enemy");
     g.addMoney(1,1000);
+
     Castle temp(750,50);
     Lord tempL(700,300,"asad al husein quran");
     g.addCastle(0,temp);

@@ -1,6 +1,6 @@
 #include "Castle.hpp"
 
-Castle::Castle(int x, int y)
+Castle::Castle(int x, int y,std::string name)
 {
     this->position.setX(x);
     this->position.setY(y);
@@ -13,7 +13,7 @@ Castle::Castle(int x, int y)
     this->spear_enable = false;
     this->archer_enable = false;
     this->horse_enable = false;
-
+    this->name = name;
 }
 Castle::Castle()
 {

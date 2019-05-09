@@ -16,38 +16,52 @@ class Game
 private:
 
 
-
-    //replace all of this with:
+    sf::RenderWindow window;
+    sf::Sprite sprites[10][2][10];
+    sf::Sprite side_menu;
+    sf::Sprite coin_icon;
+    sf::Texture castle_texture,lord_texture,sultan_texture,side_menu_texture,coin_icon_texture;
     std::vector<Player> players;
     Clock clock;
+
 public:
 
     Game();
 
+    //getters
     int getNumLords(int playerID);
     int getNumCastle(int playerID);
+    long int getTDiff();
+    long int getCurrentTime();
+    int getNumPlayers();
+    int getMoney(int PlayerID);
+    std::string getCastleName(int playerID,int castleID);
+    std::string getPlayerName(int ID);
+    Castle getCastle(int playerID, int CastleID);
+    Lord getLord(int playerID, int lordID);
     Player getPlayer(int playerID);
+
+    //setters
+    void setCastleName(int playerID,int castleID,std::string name);
+    bool setPlayerName(int ID, std::string newN);
+
+    //adding methods
+    bool addPlayerModule(Player p);
+    bool addPlayer(int ID, std::string name);
+
+    bool addCastleModule(int playedID,Castle newC);
+    bool addCastle(int playerID, int x, int y,std::string name);
+
+    bool addLordModule(int playerID,Lord newL);
+    bool addLord(int playerID, int x, int y, std::string name);
+
+    bool addMoney(int playerID,int val);
+
+    //other methods
     bool newPlayer();
     bool updateTime();
     bool calcTimeDiff();
-    long int getTDiff();
-    long int getCurrentTime();
-    bool addPlayer(Player p);
-    bool addCastle(int playedID,Castle newC);
-    bool addLord(int playerID,Lord newL);
-    int getNumPlayers();
-
-    int getMoney(int PlayerID);
-    std::string getPlayerName(int ID);
-    bool setPlayerName(int ID, std::string newN);
-
-    bool addMoney(int playerID,int val);
-    Castle getCastle(int playerID, int CastleID);
-    Lord getLord(int playerID, int lordID);
-
-    std::string getCastleName(int playerID,int castleID);
-    void setCastleName(int playerID,int castleID,std::string name);
-
+    void loadTextures();
 };
 
 
