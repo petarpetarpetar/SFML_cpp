@@ -49,3 +49,20 @@ bool Lord::setPos(Coords newPos)
     this->position.setX(newPos.getX());
     this->position.setY(newPos.getY());
 }
+
+sf::Sprite Lord::getImage()
+{
+    return this->image;
+}
+void Lord::setImage(sf::Texture texture)
+{
+    image.setTexture(texture);
+}
+
+void Lord::setImageScale(int a,int b)
+{
+    if(b==0)
+        image.setScale(a,a);
+    image.setScale(a,b);
+    return;
+}

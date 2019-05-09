@@ -21,11 +21,10 @@ int main()
     g.addPlayer(0,"petar");
     g.addPlayer(1,"enemy");
     g.addMoney(1,1000);
-
-    Castle temp(750,50);
-    Lord tempL(700,300,"asad al husein quran");
-    g.addCastle(0,temp);
-    g.addLord(0,tempL);
+    g.addCastle(0,300,300,"dvorac1");
+    g.addLord(0,300,800,"lord11");
+    g.addCastle(1,500,500,"dvorac2");
+    g.addLord(1,600,200,"lord22");
 
     //castle
     sprites[0][0][0].setTexture(castle_texture);

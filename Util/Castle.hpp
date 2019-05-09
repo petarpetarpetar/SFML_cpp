@@ -4,6 +4,7 @@
 #include "GameRules.cpp"
 #include <vector>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 enum BuildingType
 {
     //standard buildings
@@ -27,6 +28,7 @@ class Castle
 {
 private:
     //Army garnison[]
+    sf::Sprite image;
     std::string name;
     int def_bonus;
     int food;
@@ -46,13 +48,12 @@ private:
 
 
 public:
+    //constructors
     Castle(int x,int y,std::string name);
-
-    std::string getName();
-
-    void setName(std::string name);
-
     Castle();
+
+    //getters
+    std::string getName();
 
     int getDefBonus();
 
@@ -62,23 +63,33 @@ public:
 
     int getCurrentLord();
 
-    bool setCurrentLord(int newLord);
-
     int getSide();
 
-    bool setSide();
-
     int getPopulation();
-
-    bool increasePopulation(int change);
 
     int getIncome();
 
     Coords getPosition();
 
+    sf::Sprite getImage();
+
+    //setters
+    void setName(std::string name);
+
+    bool setCurrentLord(int newLord);
+
+    bool setSide();
+
     bool setPosition(Coords newC);
 
     bool SetNewBuilding(BuildingType newB);
+
+    bool setImage(sf::Texture texture);
+
+    bool setImageScale(int a, int b=0);
+
+    //other:
+    bool increasePopulation(int change);
 
     bool addBuilding(BuildingType newB);
 

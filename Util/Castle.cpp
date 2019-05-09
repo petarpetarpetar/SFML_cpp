@@ -153,3 +153,22 @@ bool Castle::updateParams() //updates income, food and def_bonus
 
     }
 }
+
+sf::Sprite Castle::getImage()
+{
+    return this->image;
+}
+
+bool Castle::setImage(sf::Texture texture)
+{
+    image.setTexture(texture);
+    return true;
+}
+
+bool Castle::setImageScale(int a, int b)
+{
+    if(b==0)
+        image.setScale(a,a);
+    image.setScale(a,b);
+    return true;
+}
