@@ -8,6 +8,7 @@
 #include "Util/Castle.hpp"
 #include "Util/GameRules.cpp"
 #include "Util/Player.hpp"
+#include "Util/eventHandler.hpp"
 
 
 #include <SFML/Graphics.hpp>
@@ -19,6 +20,14 @@ private:
     sf::RenderWindow window;
     sf::Sprite sprites[10][2][10];
     sf::Sprite side_menu;
+    sf::Font font;
+    sf::Text coin_text;
+    sf::Text name;
+    eventHandler handler;
+    Lord selectL;
+    bool selectL_flag=false;
+    Castle selectC;
+    bool selectC_flag=false;
     sf::Sprite coin_icon;
     sf::Texture castle_texture,lord_texture,sultan_texture,side_menu_texture,coin_icon_texture;
     std::vector<Player> players;
@@ -62,6 +71,9 @@ public:
     bool updateTime();
     bool calcTimeDiff();
     void loadTextures();
+
+    void run();
+
 };
 
 

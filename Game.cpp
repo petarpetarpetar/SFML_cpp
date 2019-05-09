@@ -1,5 +1,34 @@
 #include "Game.hpp"
 
+
+void Game::run()
+{
+    loadTextures();
+
+    side_menu_texture.setRepeated(true);
+    side_menu.setTexture(side_menu_texture,true);
+    side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
+
+    font.loadFromFile("resources/fonts/MIROSLN.ttf");
+
+    coin_text.setFont(font);
+    coin_text.setPosition(5,5);
+    coin_text.setScale(0.9,0.9);
+    coin_text.setColor(sf::Color::Black);
+
+    coin_icon.setTexture(coin_icon_texture,true);
+    coin_icon.setPosition(100,5);
+    coin_icon.setScale(0.2,0.2);
+    int myId = 1; //temp fix. shall be passed by networking driver
+    name.setFont(font);
+    name.setString(getPlayer(myId).getName());
+    name.setPosition(WIDTH/2,0);
+    name.setScale(1.2,1.2);
+    name.setColor(sf::Color::Black);
+
+
+
+}
 Game::Game() : clock(), window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic")
 {
     std::cout << "a new game session started"<<std::endl;

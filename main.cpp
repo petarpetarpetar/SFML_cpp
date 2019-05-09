@@ -46,40 +46,14 @@ int main()
     sprites[0][0][0].setPosition(temp_pos.getX(),temp_pos.getY());
     sprites[0][1][0].setPosition(temp_lord_c.getX(),temp_lord_c.getY());
     sprites[0][1][1].setPosition(800,300);
-    //idi kroz sve 0, n, 0 sprajtove i postavi da budu lord ili castle i slicno za 0,0,n
 
 
     //stats display - TEXT
-    sf::Font font;
-    sf::Text coin_text;
-    font.loadFromFile("resources/fonts/MIROSLN.ttf");
-    sf::Text name;
-    coin_text.setFont(font);
-    name.setFont(font);
-    int myId=1;
 
-    coin_text.setString(std::to_string(g.getMoney(myId)));
-    coin_text.setPosition(5,5);
-    coin_text.setScale(0.9,0.9);
-    coin_text.setColor(sf::Color::Black);
+    // use:    coin_text.setString(std::to_string(g.getMoney(myId)));
 
-    name.setString(g.getPlayer(myId).getName());
-    name.setPosition(WIDTH/2,0);
-    name.setScale(1.2,1.2);
-    name.setColor(sf::Color::Black);
 
-    side_menu_texture.setRepeated(true);
-    side_menu.setTexture(side_menu_texture,true);
-    side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
-    coin_icon.setTexture(coin_icon_texture,true);
-    coin_icon.setPosition(100,5);
-    coin_icon.setScale(0.2,0.2);
-    eventHandler handler;
 
-    Lord selectL;
-    bool selectL_flag=false;
-    Castle selectC;
-    bool selectC_flag=false;
 
     while (window.isOpen())
     {
