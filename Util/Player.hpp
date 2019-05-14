@@ -31,6 +31,7 @@ public:
     bool addMoney(int val);
     std::string getCastleName(int castleID);
     void setCastleName(int CastleID, std::string name);
+    bool setCastlePos(int x, int y);
 
 
 };

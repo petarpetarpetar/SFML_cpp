@@ -3,6 +3,7 @@
 
 long int game_cycle = 0;
 int player_coutn = 0;
+int MYID=0;
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include "Util/eventHandler.hpp"
@@ -21,8 +22,14 @@ int main()
     g.addPlayer(0,"petar");
     g.addPlayer(1,"enemy");
     g.addMoney(1,1000);
-    Castle temp(100,100,"ugljevik");
-    g.addCastleModule(0,temp);
+    g.addCastle(0,500,500,"castle1");
+
+    g.addCastle(1,200,200,"castle2");
+    g.addLord(0,100,100,"lord1");
+    g.addLord(1,400,100,"lord2");
+
+
+
     g.run();
     //g.addLord(0,300,800,"lord11");
     //g.addCastle(1,500,500,"dvorac2");

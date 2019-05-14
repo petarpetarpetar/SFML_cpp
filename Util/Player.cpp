@@ -39,6 +39,12 @@ Player::Player(int playerID,std::string name)
     this->name = name;
 }
 
+bool Player::setCastlePos(int x, int y)
+{
+    Coords temp(x,y);
+    castles.at(castles.size()-1).setPosition(temp);
+}
+
 int Player::getMoney()
 {
     return this->money;

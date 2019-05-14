@@ -93,8 +93,16 @@ void Game::handle(sf::Event event)
 
 void Game::run()
 {
-    loadTextures();
 
+    for(int i=0;i<10;i++)
+    {
+        for(int j =0; j<10;j++)
+        {
+            sprites[i][0][j].setScale(0.2,0.2);
+            sprites[i][1][j].setScale(0.1,0.1);
+        }
+    }
+    loadTextures();
     grass.setFillColor(sf::Color(30,180,10));
     side_menu_texture.setRepeated(true);
     side_menu.setTexture(side_menu_texture,true);
@@ -129,7 +137,7 @@ void Game::run()
         for(int j=0;j<getNumLords(i);j++)
         {
             sprites[i][1][j].setTexture(lord_texture);
-            sprites[i][0][j].setPosition(getLord(i,j).getPosition().getX(),getLord(i,j).getPosition().getY());
+            sprites[i][1][j].setPosition(getLord(i,j).getPosition().getX(),getLord(i,j).getPosition().getY());
         }
     }
 
@@ -191,19 +199,8 @@ Player Game::getPlayer(int playerID)
     return players.at(playerID);
 }
 
-bool Game::addCastleModule(int playerID,Castle newC)
-{
-    players.at(playerID).addCastle(newC);
-    return true;
-}
-/*
-bool Game::addCastle(int playerID,int x,int y,std::string name)
-{
-    Castle c(int x,int y,std::string name);
-    players.at(playerID).addCastle(c);
-    return true;
-}
-*/
+
+
 int Game::getNumPlayers()
 {
     return this->players.size();
@@ -217,8 +214,29 @@ bool Game::addLordModule(int playerID,Lord newL)
 
 bool Game::addLord(int playerID,int x,int y, std::string name)
 {
-    Lord temp(x,y,name);
+    Lord temp;
+    Coords pos;
+    pos.setX(x);
+    pos.setY(y);
+    temp.setPos(pos);
     addLordModule(playerID,temp);
+    return true;
+}
+
+bool Game::addCastleModule(int playerID,Castle newC)
+{
+    players.at(playerID).addCastle(newC);
+    return true;
+}
+
+bool Game::addCastle(int playerID,int x,int y,std::string name)
+{
+    Castle temp;
+    Coords pos(x,y);
+    temp.setName(name);
+    temp.setPosition(pos);
+    addCastleModule(playerID,temp);
+
     return true;
 }
 
