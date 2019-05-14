@@ -13,7 +13,7 @@ int Player::getNumCastle()
     return this->castles.size();
 }
 
-bool Player::addCaste(Castle newC)
+bool Player::addCastle(Castle newC)
 {
     castles.push_back(newC);
 }

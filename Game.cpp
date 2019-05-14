@@ -1,10 +1,101 @@
 #include "Game.hpp"
 
+void Game::check()
+{
+     sf::Event event;
+        while (window.pollEvent(event))
+            handle(event);
+}
+
+void Game::draw()
+{
+
+    //std::cout <<"display loop========= \n";
+    //std::cout <<"number of players:"<<getNumPlayers()<<std::endl;
+
+    window.draw(grass);
+    window.draw(side_menu);
+    window.draw(coin_icon);
+    window.draw(coin_text);
+    for(int i=0;i<getNumPlayers();i++)
+    {
+        //std::cout <<"player["<<i<<"] castles: " << getNumCastle(i) <<std::endl;
+        for(int j=0;j<getNumCastle(i);j++)
+        {
+
+            window.draw(sprites[i][0][j]);
+
+        }
+
+        //std::cout <<"player["<<i<<"] lords: " << getNumLords(i) << std::endl;
+        for(int j=0;j<getNumLords(i);j++)
+        {
+            window.draw(sprites[i][1][j]);
+        }
+    }
+
+    window.display();
+
+
+}
+void Game::handle(sf::Event event)
+{
+
+    switch(event.type)
+            {
+                case(sf::Event::Closed):
+                    window.close();
+
+                    break;
+
+                case(sf::Event::MouseButtonPressed):
+                    std::cout <<"click : " << event.mouseButton.x << " " << event.mouseButton.y <<std::endl;
+                    if(event.mouseButton.button == sf::Mouse::Right){
+                        std::cout << "the right button was pressed" << std::endl;}
+
+                    if(event.mouseButton.button == sf::Mouse::Left){
+                        //check if click contains a sprite (should be looped through every possible sprite
+                        std::cout << sprites[0][1][0].getGlobalBounds().left << " " << sprites[0][1][0].getGlobalBounds().top;
+                        std::cout << " " << sprites[0][1][0].getGlobalBounds().width << " " << sprites[0][1][0].getGlobalBounds().height << std::endl;
+                        if(sprites[0][1][0].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
+                        {
+                            for(int i =0;i<getNumPlayers();i++)
+                            {
+                                for(int j = 0;j <getNumLords(i); j++)
+                                {
+                                    std::cout<<"debug";
+                                        if(getNumLords(i)==0){continue;}
+                                        Coords temp =getLord(i,j).getPosition();
+                                        float spriteLocX;
+                                        float spriteLocY;
+                                        spriteLocX = sprites[i][1][j].getPosition().x;
+                                        spriteLocY = sprites[i][1][j].getPosition().y;
+                                        std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
+                                        std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
+                                        if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
+                                        {
+                                            std::cout << "returning from function.\n";
+                                            selectL = (getLord(i,j));
+                                            return;
+
+                                        }
+                                }
+                                //or may it be castle
+                            }
+                        }
+                    }
+
+                    break;
+
+            }
+
+}
 
 void Game::run()
 {
     loadTextures();
 
+    grass.setFillColor(sf::Color(30,180,10));
     side_menu_texture.setRepeated(true);
     side_menu.setTexture(side_menu_texture,true);
     side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
@@ -27,9 +118,24 @@ void Game::run()
     name.setColor(sf::Color::Black);
 
 
+    for(int i=0;i<getNumPlayers();i++)
+    {
+        for(int j=0;j<getNumCastle(i);j++)
+        {
+            sprites[i][0][j].setTexture(castle_texture);
+            sprites[i][0][j].setPosition(getCastle(i,j).getPosition().getX(),getCastle(i,j).getPosition().getY());
+        }
+
+        for(int j=0;j<getNumLords(i);j++)
+        {
+            sprites[i][1][j].setTexture(lord_texture);
+            sprites[i][0][j].setPosition(getLord(i,j).getPosition().getX(),getLord(i,j).getPosition().getY());
+        }
+    }
+
 
 }
-Game::Game() : clock(), window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic")
+Game::Game() : clock(), window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor - Petar Markovic"), grass(sf::Vector2f(WIDTH,HEIGHT))
 {
     std::cout << "a new game session started"<<std::endl;
 }
@@ -87,16 +193,17 @@ Player Game::getPlayer(int playerID)
 
 bool Game::addCastleModule(int playerID,Castle newC)
 {
-    players.at(playerID).addCaste(newC);
+    players.at(playerID).addCastle(newC);
     return true;
 }
+/*
 bool Game::addCastle(int playerID,int x,int y,std::string name)
 {
     Castle c(int x,int y,std::string name);
-    players.at(playerID).addCaste(c);
+    players.at(playerID).addCastle(c);
     return true;
 }
-
+*/
 int Game::getNumPlayers()
 {
     return this->players.size();
@@ -170,3 +277,7 @@ bool Game::addMoney(int PlayerID,int val)
     return true;
 }
 
+bool Game::isRunning()
+{
+    return window.isOpen();
+}

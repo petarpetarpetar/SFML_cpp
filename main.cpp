@@ -21,11 +21,13 @@ int main()
     g.addPlayer(0,"petar");
     g.addPlayer(1,"enemy");
     g.addMoney(1,1000);
-    g.addCastle(0,300,300,"dvorac1");
-    g.addLord(0,300,800,"lord11");
-    g.addCastle(1,500,500,"dvorac2");
-    g.addLord(1,600,200,"lord22");
-
+    Castle temp(100,100,"ugljevik");
+    g.addCastleModule(0,temp);
+    g.run();
+    //g.addLord(0,300,800,"lord11");
+    //g.addCastle(1,500,500,"dvorac2");
+    //g.addLord(1,600,200,"lord22");
+/*
     //castle
     sprites[0][0][0].setTexture(castle_texture);
     sprites[0][0][0].setScale(0.2,0.2);
@@ -51,40 +53,23 @@ int main()
     //stats display - TEXT
 
     // use:    coin_text.setString(std::to_string(g.getMoney(myId)));
+*/
 
 
 
-
-    while (window.isOpen())
+    while (g.isRunning())
     {
-        sf::Event ev;
-        while (window.pollEvent(ev))
-        {
-            sf::Event& event = ev;
-            handler.handle(ev,winref,sprites,&g,&selectL,&selectC);
-
-
-
-        }
-
-        window.draw(grass);
-        window.draw(side_menu);
-        window.draw(sprites[0][0][0]);
-        window.draw(sprites[0][1][0]);
-        window.draw(sprites[0][1][1]);
-        window.draw(coin_icon);
-        window.draw(name);
-        window.draw(coin_text);
-        g.addMoney(1,2);
-        coin_text.setString(std::to_string(g.getMoney(myId)));
-        window.display();
-
+        //g check for events
+        g.check();
+        g.draw();
+    }
 
 
 
         //ignore for now
 
-        for(int i =0; i < g.getNumPlayers();i++)
+    /**<
+       for(int i =0; i < g.getNumPlayers();i++)
         {
             //draw all the castles on the map
             for(int j = 0; j < g.getPlayer(i).getNumCastle(); j++)
@@ -100,6 +85,7 @@ int main()
         }
 
     }
+    */
 
     return 0;
 }

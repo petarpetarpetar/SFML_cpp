@@ -1,5 +1,5 @@
 #include "eventHandler.hpp"
-
+/*
 eventHandler::eventHandler()
 {
     std::cout << "created eventHandler\n";
@@ -9,7 +9,7 @@ eventHandler::~eventHandler()
     std::cout << "destroyed eventHandler\n";
 }
 
-void eventHandler::handle(sf::Event event,sf::RenderWindow& window,sf::Sprite sprites[10][2][10],Game* g,Lord* selectL, Castle* selectC)
+void eventHandler::handle(sf::Event event,sf::RenderWindow& window,sf::Sprite sprites[10][2][10],Game* g,Lord* selectL, Castle* selectC): g(),selectL(),selectC()
 {
 
     switch(event.type)
@@ -61,3 +61,4 @@ void eventHandler::handle(sf::Event event,sf::RenderWindow& window,sf::Sprite sp
             }
 
 }
+*/

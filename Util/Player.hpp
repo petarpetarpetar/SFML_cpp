@@ -21,7 +21,7 @@ public:
     Player(int playerID,std::string name);
     int getNumLords();
     int getNumCastle();
-    bool addCaste(Castle newC);
+    bool addCastle(Castle newC);
     bool addLord(Lord newL);
     Castle getCastle(int castleID);
     Lord getLord(int lordID);
