@@ -18,17 +18,18 @@ private:
 
     sf::RenderWindow window;
     sf::Sprite sprites[10][2][10];
-    sf::Sprite side_menu,coin_icon;
+    sf::Sprite side_menu,coin_icon,side_info;
     sf::RectangleShape grass;
     sf::Font font;
     sf::Text coin_text;
-    sf::Text name;
+    sf::Text name,entity_name;
     Lord selectL;
     bool selectL_flag=false;
     Castle selectC;
     bool selectC_flag=false;
 
-    sf::Texture castle_texture,lord_texture,sultan_texture,side_menu_texture,coin_icon_texture;
+
+    sf::Texture castle_texture,lord_texture,sultan_texture,side_menu_texture,coin_icon_texture,side_info_texture;
     std::vector<Player> players;
     Clock clock;
 
@@ -73,7 +74,7 @@ public:
     void draw();
     void check();
     void handle(sf::Event event);
-
+    void update();
     void run();
     bool isRunning();
     sf::RenderWindow getWin();

@@ -13,11 +13,16 @@ void Game::draw()
     //std::cout <<"display loop========= \n";
     //std::cout <<"number of players:"<<getNumPlayers()<<std::endl;
 
+    if(selectC_flag){entity_name.setString(selectC.getName());}
+    else if(selectL_flag){entity_name.setString(selectL.getName());}
+    else {entity_name.setString("");}
     window.draw(grass);
     window.draw(side_menu);
     window.draw(coin_icon);
     window.draw(coin_text);
+    window.draw(side_info);
     window.draw(name);
+    window.draw(entity_name);
     for(int i=0;i<getNumPlayers();i++)
     {
         //std::cout <<"player["<<i<<"] castles: " << getNumCastle(i) <<std::endl;
@@ -68,19 +73,10 @@ void Game::handle(sf::Event event)
                                 if(sprites[i][1][j].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
                                 {
                                     std::cout <<"it suits to lord i/j : " << i << "/" << j <<std::endl;
-                                    for(int i =0;i<getNumPlayers();i++)
-                                    {
-                                        for(int j = 0;j <getNumLords(i); j++)
-                                        {
-                                            if(getNumLords(i)==0){continue;}
-                                            Coords temp =getLord(i,j).getPosition();
-                                            float spriteLocX;
-                                            float spriteLocY;
-                                            spriteLocX = sprites[i][1][j].getPosition().x;
-                                            spriteLocY = sprites[i][1][j].getPosition().y;
-                                            std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
-                                            std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
-                                            if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
+                                        Coords temp = getLord(i,j).getPosition();
+                                        std::cout <<"temp cords of lord = " << temp.getX()<<" " << temp.getY() <<std::endl;
+
+                                            if(sprites[i][1][j].getPosition().x == temp.getX() && sprites[i][1][j].getPosition().y == temp.getY())
                                             {
                                                 std::cout << "returning from function, found lord\n";
                                                 selectL = (getLord(i,j));
@@ -88,24 +84,20 @@ void Game::handle(sf::Event event)
                                                 selectL_flag = true;
                                                 return;
                                             }
-                                        }
-                                    }
                                 }
-                                else if(sprites[i][0][j].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
+                            }
+                        }
+                            for(int i =0;i<getNumPlayers();i++)
+                            {
+                                for(int j =0;j<getNumCastle(i);j++)
                                 {
-                                    for(int i =0;i<getNumPlayers();i++)
+                                    if(sprites[i][0][j].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
                                     {
-                                        for(int j = 0;j <getNumCastle(i); j++)
-                                        {
-                                            if(getNumCastle(i)==0){continue;}
-                                            Coords temp =getCastle(i,j).getPosition();
-                                            float spriteLocX;
-                                            float spriteLocY;
-                                            spriteLocX = sprites[i][0][j].getPosition().x;
-                                            spriteLocY = sprites[i][0][j].getPosition().y;
-                                            std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
-                                            std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
-                                            if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
+                                        std::cout << "it suits to castle i/j : " << i << "/" << j <<std::endl;
+                                        Coords temp = getCastle(i,j).getPosition();
+                                        std::cout << "temp cords of castle = " << temp.getX() <<" "<< temp.getY() <<std::endl;
+                                        if(sprites[i][0][j].getPosition().x == temp.getX())
+                                            if(sprites[i][0][j].getPosition().y == temp.getY())
                                             {
                                                 std::cout << "returning from function, found castle \n";
                                                 selectC = (getCastle(i,j));
@@ -116,18 +108,17 @@ void Game::handle(sf::Event event)
                                         }
                                     }
                                 }
-                            }
-                        }
+
+
                         //if clicked on grass
                         selectC_flag = false;
                         selectL_flag = false;
                         std::cout << "returning from function, found nothing.\n";
                         return;
-                    }
 
-                    break;
-
+                break;
             }
+        }
 
 }
 
@@ -150,6 +141,12 @@ void Game::run()
     side_menu.setTexture(side_menu_texture,true);
     side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
 
+    side_info_texture.setRepeated(true);
+    side_info.setTexture(side_info_texture);
+    side_info.setTextureRect(sf::IntRect(0,0,100,HEIGHT));
+    side_info.setPosition(WIDTH-100,0);
+
+
     font.loadFromFile("resources/fonts/MIROSLN.ttf");
     int myId = 0; //temp fix. shall be passed by networking driver
     coin_text.setFont(font);
@@ -166,6 +163,11 @@ void Game::run()
     name.setPosition(WIDTH/2,0);
     name.setScale(1.2,1.2);
     name.setColor(sf::Color::Black);
+
+    entity_name.setFont(font);
+    entity_name.setPosition(WIDTH-90,0);
+    entity_name.setScale(0.9,0.9);
+    entity_name.setColor(sf::Color::Black);
 
 
     for(int i=0;i<getNumPlayers();i++)
@@ -193,16 +195,17 @@ Game::Game() : clock(), window(sf::VideoMode(WIDTH, HEIGHT), "Knights of Honor -
 void Game::loadTextures()
 {
     if(!castle_texture.loadFromFile("resources/graphics_castle.png"))
-        std::cout <<"error: failed to load graphics_castle.png"<<std::endl;
+        std::cout << "error: failed to load graphics_castle.png"<<std::endl;
     if(!side_menu_texture.loadFromFile("resources/side_texture.jpg"))
-        std::cout <<"error:failed to load side_texture.jpg"<<std::endl;
+        std::cout << "error:failed to load side_texture.jpg"<<std::endl;
     if(!lord_texture.loadFromFile("resources/JPG_graphics_lord.jpg"))
         std::cout << "error: failed to load JPG_graphics_lord.jpg"<<std::endl;
     if(!sultan_texture.loadFromFile("resources/sultan.jpg"))
         std::cout << "error: failed to load sultan.jpg\n";
     if(!coin_icon_texture.loadFromFile("resources/coin-icon.png"))
-        std::cout <<"error:failed to load coin-icon.png"<<std::endl;
-
+        std::cout << "error:failed to load coin-icon.png"<<std::endl;
+    if(!side_info_texture.loadFromFile("resources/stone_texture.jpg"))
+        std::cout << "error: failed to load stone_texture.jpg" <<std::endl;
 }
 long int Game::getCurrentTime()
 {
@@ -261,6 +264,7 @@ bool Game::addLord(int playerID,int x,int y, std::string name)
     pos.setX(x);
     pos.setY(y);
     temp.setPos(pos);
+    temp.setName(name); // ovo treba da uradis
     addLordModule(playerID,temp);
     return true;
 }
@@ -341,3 +345,11 @@ bool Game::isRunning()
 {
     return window.isOpen();
 }
+
+
+void update()
+{
+    //update everything
+}
+
+

@@ -4,7 +4,7 @@ Lord::Lord(int posX,int posY, std::string _name)
 {
     position.setX(posX);
     position.setY(posY);
-    this->name = _name;
+    this->nameOfLord = _name;
 }
 bool Lord::setSide(int _side)
 {
@@ -54,11 +54,15 @@ sf::Sprite Lord::getImage()
 {
     return this->image;
 }
+
+bool Lord::setName(std::string name)
+{
+    this->nameOfLord = name;
+}
 void Lord::setImage(sf::Texture texture)
 {
     image.setTexture(texture);
 }
-
 void Lord::setImageScale(int a,int b)
 {
     if(b==0)
@@ -66,3 +70,8 @@ void Lord::setImageScale(int a,int b)
     image.setScale(a,b);
     return;
 }
+std::string Lord::getName()
+{
+    return this->nameOfLord;
+}
+

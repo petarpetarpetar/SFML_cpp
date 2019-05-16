@@ -4,6 +4,7 @@
 #include "Army.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <string>
 class Lord
 {
 private:
@@ -13,7 +14,7 @@ private:
     int battlesWon;
     int side;
     int lastBattle;
-    std::string name;
+    std::string nameOfLord;
     Coords position;
     int _status; //alive or dead   mozda ide samo status _status nisam sig   0-dead, 1-alive, 2-in_castle
 
@@ -33,6 +34,8 @@ public:
     bool incBattlesWon();
     bool setPos(Coords newPos);
     bool setSide(int _side);
+    std::string getName();
+    bool setName(std::string name);
 
     //some army functions
 
