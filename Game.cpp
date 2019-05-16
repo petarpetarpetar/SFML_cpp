@@ -9,7 +9,7 @@ void Game::check()
 
 void Game::draw()
 {
-
+    //update everything
     //std::cout <<"display loop========= \n";
     //std::cout <<"number of players:"<<getNumPlayers()<<std::endl;
 
@@ -17,6 +17,7 @@ void Game::draw()
     window.draw(side_menu);
     window.draw(coin_icon);
     window.draw(coin_text);
+    window.draw(name);
     for(int i=0;i<getNumPlayers();i++)
     {
         //std::cout <<"player["<<i<<"] castles: " << getNumCastle(i) <<std::endl;
@@ -55,34 +56,73 @@ void Game::handle(sf::Event event)
 
                     if(event.mouseButton.button == sf::Mouse::Left){
                         //check if click contains a sprite (should be looped through every possible sprite
-                        std::cout << sprites[0][1][0].getGlobalBounds().left << " " << sprites[0][1][0].getGlobalBounds().top;
-                        std::cout << " " << sprites[0][1][0].getGlobalBounds().width << " " << sprites[0][1][0].getGlobalBounds().height << std::endl;
-                        if(sprites[0][1][0].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
+                        //first find to what spr
+                        for(int i =0;i<getNumPlayers();i++)
                         {
-                            for(int i =0;i<getNumPlayers();i++)
+                            for(int j =0;j<getNumLords(i);j++)
                             {
-                                for(int j = 0;j <getNumLords(i); j++)
-                                {
-                                    std::cout<<"debug";
-                                        if(getNumLords(i)==0){continue;}
-                                        Coords temp =getLord(i,j).getPosition();
-                                        float spriteLocX;
-                                        float spriteLocY;
-                                        spriteLocX = sprites[i][1][j].getPosition().x;
-                                        spriteLocY = sprites[i][1][j].getPosition().y;
-                                        std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
-                                        std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
-                                        if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
-                                        {
-                                            std::cout << "returning from function.\n";
-                                            selectL = (getLord(i,j));
-                                            return;
 
+                                //std::cout << sprites[i][1][j].getGlobalBounds().left << " " << sprites[i][1][j].getGlobalBounds().top;
+                                //std::cout << " " << sprites[i][1][j].getGlobalBounds().width << " " << sprites[i][1][j].getGlobalBounds().height << std::endl;
+
+                                if(sprites[i][1][j].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
+                                {
+                                    std::cout <<"it suits to lord i/j : " << i << "/" << j <<std::endl;
+                                    for(int i =0;i<getNumPlayers();i++)
+                                    {
+                                        for(int j = 0;j <getNumLords(i); j++)
+                                        {
+                                            if(getNumLords(i)==0){continue;}
+                                            Coords temp =getLord(i,j).getPosition();
+                                            float spriteLocX;
+                                            float spriteLocY;
+                                            spriteLocX = sprites[i][1][j].getPosition().x;
+                                            spriteLocY = sprites[i][1][j].getPosition().y;
+                                            std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
+                                            std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
+                                            if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
+                                            {
+                                                std::cout << "returning from function, found lord\n";
+                                                selectL = (getLord(i,j));
+                                                selectC_flag = false;
+                                                selectL_flag = true;
+                                                return;
+                                            }
                                         }
+                                    }
                                 }
-                                //or may it be castle
+                                else if(sprites[i][0][j].getGlobalBounds().contains(event.mouseButton.x,event.mouseButton.y))
+                                {
+                                    for(int i =0;i<getNumPlayers();i++)
+                                    {
+                                        for(int j = 0;j <getNumCastle(i); j++)
+                                        {
+                                            if(getNumCastle(i)==0){continue;}
+                                            Coords temp =getCastle(i,j).getPosition();
+                                            float spriteLocX;
+                                            float spriteLocY;
+                                            spriteLocX = sprites[i][0][j].getPosition().x;
+                                            spriteLocY = sprites[i][0][j].getPosition().y;
+                                            std::cout << "locX,locY: " << spriteLocX << "," << spriteLocY << std::endl;
+                                            std::cout << "uporedjuj: " << temp.getX()<<","<<temp.getY() <<std::endl;
+                                            if(spriteLocX == temp.getX() && spriteLocY == temp.getY())
+                                            {
+                                                std::cout << "returning from function, found castle \n";
+                                                selectC = (getCastle(i,j));
+                                                selectC_flag = true;
+                                                selectL_flag = false;
+                                                return;
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
+                        //if clicked on grass
+                        selectC_flag = false;
+                        selectL_flag = false;
+                        std::cout << "returning from function, found nothing.\n";
+                        return;
                     }
 
                     break;
@@ -100,6 +140,8 @@ void Game::run()
         {
             sprites[i][0][j].setScale(0.2,0.2);
             sprites[i][1][j].setScale(0.1,0.1);
+            //sprites[i][1][j].setOrigin(sf::Vector2f(sprites[i][1][j].getTexture()->getSize().x * 0.5 / 5,sprites[i][1][j].getTexture()->getSize().y * 0.5 / 5));
+            //sprites[i][0][j].setOrigin(sf::Vector2f(sprites[i][0][j].getTexture()->getSize().x * 0.5 / 10,sprites[i][0][j].getTexture()->getSize().y * 0.5 / 10));
         }
     }
     loadTextures();
@@ -109,16 +151,16 @@ void Game::run()
     side_menu.setTextureRect(sf::IntRect(0,0,WIDTH,40));
 
     font.loadFromFile("resources/fonts/MIROSLN.ttf");
-
+    int myId = 0; //temp fix. shall be passed by networking driver
     coin_text.setFont(font);
     coin_text.setPosition(5,5);
     coin_text.setScale(0.9,0.9);
     coin_text.setColor(sf::Color::Black);
-
+    coin_text.setString(std::to_string(getMoney(myId)));
     coin_icon.setTexture(coin_icon_texture,true);
     coin_icon.setPosition(100,5);
     coin_icon.setScale(0.2,0.2);
-    int myId = 1; //temp fix. shall be passed by networking driver
+
     name.setFont(font);
     name.setString(getPlayer(myId).getName());
     name.setPosition(WIDTH/2,0);
