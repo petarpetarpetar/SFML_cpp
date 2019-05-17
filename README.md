@@ -26,7 +26,7 @@ To be written.
 
 ## Built With
 
-* [Dropwizard](https://www.sfml-dev.org/index.php) - The graphics and network framework used
+* [SFML](https://www.sfml-dev.org/index.php) - The graphics and network framework used
 
 ## Acknowledgments
 
